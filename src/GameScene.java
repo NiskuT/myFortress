@@ -13,11 +13,13 @@ public class GameScene extends Scene {
         super(root,length,height,z);
         camera = new Camera(0,0);
 
-        staticThing context = new staticThing(Double.valueOf(0),Double.valueOf(0),"ressources/desert.png");
+        staticThing context = new staticThing(Double.valueOf(0),Double.valueOf(0), 5);
+        Hero personnage = new Hero();
 
 
 
         root.getChildren().add(context);
+        root.getChildren().add(personnage.getSprite());
 
 
     }

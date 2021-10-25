@@ -16,7 +16,7 @@ public class hello extends Application {
 
         Group root = new Group();
 
-        Scene theScene = new GameScene(root, 1000, 400,true);
+        Scene theScene = new GameScene(root, 600, 400,true);
 
         primaryStage.setScene(theScene);
 
