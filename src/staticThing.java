@@ -63,4 +63,18 @@ public class staticThing extends Pane{
 
     }
 
+    public void update(Double x, Double y){
+        this.x = -Double.valueOf(x%lengthBackground);
+        this.y = y;
+        this.updateCoor();
+
+    }
+
+    private void updateCoor(){
+        backLeft.setX(this.x);
+        backLeft.setY(this.y);
+        backRight.setX(lengthBackground +this.x);
+        backRight.setY(this.y);
+    }
+
 }
