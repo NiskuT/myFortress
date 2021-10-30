@@ -26,15 +26,15 @@ public class Camera {
 
     public void update(long time, double xPerso){
         if( lastCall==0) lastCall = time;
-        double m = 1;
-        double k = 4;
-        double f = 1;
+        double m = 2;
+        double k = 2;
+        double f = 0.85;
         double ax;
 
         ax=(k*(xPerso-x)-f*vx)/m;
         vx += ax*(time-lastCall)*Math.pow(10,-9);
         x+=vx*(time-lastCall)*Math.pow(10,-9);
-        System.out.println(x);
+
         lastCall=time;
 
 

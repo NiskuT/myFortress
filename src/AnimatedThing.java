@@ -9,6 +9,8 @@ public abstract class AnimatedThing {
     private Double x;
     private Double vx;
     private Double ax;
+    private Double ay;
+    private Double vy;
     private Double y;
 
     private ImageView sprite;
@@ -26,17 +28,23 @@ public abstract class AnimatedThing {
     private Integer winWidth = 600;
 
     public AnimatedThing(Double x, Double y,String fileName, Integer attitude) {
-        this.x = x;
-        vx=Double.valueOf(4);
+
         ax=Double.valueOf(0);
-        this.y = winHeight-y-100-50;
+        vx=Double.valueOf(140);
+        this.x = x;
+
+        ay=Double.valueOf(-9.81);
+        vy=Double.valueOf(0);
+        this.y = y;
+
+
         this.fileName=fileName;
         this.sprite = new ImageView(new Image(fileName));
 
 
         sprite.setViewport(new Rectangle2D(0,0,85,100));
         sprite.setX(this.x);
-        sprite.setY(this.y);
+        sprite.setY(winHeight-this.y-100-50); // 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center the hero)
 
         this.attitude = attitude;
         index = 0;
@@ -52,10 +60,18 @@ public abstract class AnimatedThing {
         vx+=ax*(time-lastCall)*Math.pow(10,-9);
         x+=vx*(time-lastCall)*Math.pow(10,-9);
 
+        vy+=ay*(time-lastCall)*Math.pow(10,-9);
+        y+=vy*(time-lastCall)*Math.pow(10,-9);
+        if (y<=0) {
+            vy = Double.valueOf(0);
+            y = Double.valueOf(0);
+        }
+
+        System.out.println(vy);
         index=(index+1)%indexMax;
         sprite.setViewport(new Rectangle2D(85*index,0,85,100));
-        sprite.setX(this.x-xCamera);
-        sprite.setY(this.y);
+        sprite.setX(this.x-xCamera+100);
+        sprite.setY(winHeight-this.y-100-50);
         lastCall=time;
     }
 
@@ -65,5 +81,9 @@ public abstract class AnimatedThing {
 
     public Double getY() {
         return y;
+    }
+
+    public void jump() {
+        vy = Double.valueOf(60);
     }
 }

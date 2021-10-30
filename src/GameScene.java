@@ -18,6 +18,10 @@ public class GameScene extends Scene {
         staticThing context = new staticThing(Double.valueOf(0),Double.valueOf(0), 5);
         Hero personnage = new Hero();
 
+        this.setOnMouseClicked( (event)->{
+            personnage.jump();
+        });
+
 
 
         AnimationTimer timer = new AnimationTimer() {
