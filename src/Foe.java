@@ -4,7 +4,7 @@ import javafx.scene.image.ImageView;
 
 public class Foe extends AnimatedThing {
     public Foe() {
-        super(Double.valueOf(50), Double.valueOf(0), "ressources/heros.png", 0);
+        super(50., 0., "ressources/heros.png", 0);
 
         ax = Double.valueOf(0);
         vx = Double.valueOf(6 * (85 / 1.70));
@@ -23,7 +23,7 @@ public class Foe extends AnimatedThing {
         sprite.setX(this.x);
         sprite.setY(winHeight - this.y - 100 - 50); // 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center the hero)
 
-        this.attitude = attitude;
+
         index = 0;
         indexMax = 5;
     }

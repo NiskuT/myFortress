@@ -26,8 +26,8 @@ public class Camera {
 
     public void update(long time, double xPerso){
         if( lastCall==0) lastCall = time;
-        double m = 2;
-        double k = 2;
+        double m = 1;
+        double k = 3;
         double f = 0.85;
         double ax;
 

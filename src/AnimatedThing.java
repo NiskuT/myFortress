@@ -15,13 +15,12 @@ public abstract class AnimatedThing {
 
     protected ImageView sprite;
 
-    protected Integer attitude;
     protected String fileName;
-    protected Integer sens;
-
 
     protected Integer index;
     protected Integer indexMax;
+    protected String state;
+    protected String prevState;
     protected long lastCall;
 
     protected Integer winHeight = 400;
@@ -39,8 +38,9 @@ public abstract class AnimatedThing {
         this.fileName=fileName;
         this.sprite = new ImageView(new Image(fileName));
 
-        this.attitude = attitude;
         index = 0;
+        state = "running";
+        prevState = "";
     }
 
     public ImageView getSprite() {
