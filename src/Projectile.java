@@ -3,53 +3,41 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Projectile extends AnimatedThing{
-    public Projectile() {
-        super(50., 0., "ressources/shooting.png", 0);
+    private int timeBeforeExplosion = 8;
 
-        ax = 0.5* (85 / 1.70);
-        vx = 8. * (85 / 1.70);
-        this.x = x;
-        this.y = y;
+    public Projectile(Double x, Double y, Boolean sprint) {
+        super(x+85, y+50, "ressources/shooting.png", 5);
 
-        this.fileName = fileName;
+        ax = 0.7* (85 / 1.70);
+        vx = 16. * (85 / 1.70);
+
         this.sprite = new ImageView(new Image(fileName));
-
-
-        sprite.setX(this.x);
-        sprite.setY(winHeight - this.y - 100 - 50); // 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center the hero)
 
         index = 0;
         indexMax = 5;
+
+        if (sprint) state = "sprint";
+        else state = "classic";
     }
 
     public void update(Double xCamera, long time){
         if( lastCall==0) lastCall = time;
-        vx+=ax*(time-lastCall)*Math.pow(10,-9);
-        x+=vx*(time-lastCall)*Math.pow(10,-9);
+        System.out.println(x);
+        if (state.compareTo("explose")!=0) {
 
-        vy+=ay*(time-lastCall)*Math.pow(10,-9);
-        y+=vy*(time-lastCall)*Math.pow(10,-9);
-
-        if (y<=0) {
-            vy = Double.valueOf(0);
-            y = Double.valueOf(0);
-            doubleJump = false;
-            state = "running";
+            vx += ax * (time - lastCall) * Math.pow(10, -9);
+            x += vx * (time - lastCall) * Math.pow(10, -9);
         }
 
-        if (vy<0){
-            state = "jumpingDown";
-        }
+        if (timeBeforeExplosion==0) state = "explose";
 
+        selectViewPort(xCamera);
 
-
-        selectViewPort();
-        sprite.setX(this.x-xCamera+100);
-        sprite.setY(winHeight-this.y-100-50);
         lastCall=time;
+        timeBeforeExplosion--;
     }
 
-    private void selectViewPort(){
+    private void selectViewPort(Double xCamera){
 
         if (prevState.compareTo(state)!=0) index = 0;
 
@@ -58,18 +46,24 @@ public class Projectile extends AnimatedThing{
                 indexMax = 3;
                 index = (index + 1) % indexMax;
                 sprite.setViewport(new Rectangle2D(40 * index, 0, 40, 40));
+                sprite.setX(this.x-xCamera+50);
+                sprite.setY(winHeight-this.y-20-50);
                 break;
 
             case "sprint":
                 indexMax = 3;
                 index = (index + 1) % indexMax;
                 sprite.setViewport(new Rectangle2D(90 * index, 40, 90, 60));
+                sprite.setX(this.x-xCamera+50);
+                sprite.setY(winHeight-this.y-30-50);
                 break;
 
             case "explose":
                 indexMax = 6;
                 index = (index + 1) % indexMax;
                 sprite.setViewport(new Rectangle2D(70*index, 100, 70, 70));
+                sprite.setX(this.x-xCamera+35);
+                sprite.setY(winHeight-this.y-35-50);
                 break;
 
 

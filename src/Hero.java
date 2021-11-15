@@ -7,7 +7,7 @@ public class Hero extends AnimatedThing{
     private Double vmin = 6. * (85 / 1.70);
 
     public Hero() {
-        super(50., 0., "ressources/heros.png", 0);
+        super(50., 0., "ressources/heros.png", 6);
 
         ax = 0.;
         vx = 6. * (85 / 1.70);
@@ -16,6 +16,7 @@ public class Hero extends AnimatedThing{
         vy = 0.;
 
         update(0.,0);// 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center the hero)
+
 
     }
 
@@ -26,17 +27,18 @@ public class Hero extends AnimatedThing{
 
         vy+=ay*(time-lastCall)*Math.pow(10,-9);
         y+=vy*(time-lastCall)*Math.pow(10,-9);
+        System.out.println("personnage: "+y.toString());
 
         if (y<=0) {
             vy = Double.valueOf(0);
             y = Double.valueOf(0);
             doubleJump = false;
-            state = "running";
+            //state = "running";
         }
-
+/*
         if (vy<0){
             state = "jumpingDown";
-        }
+        }*/
 
         if (vx>vmax){
             ax = -ax;
@@ -47,7 +49,7 @@ public class Hero extends AnimatedThing{
         }
 
         selectViewPort();
-        sprite.setX(this.x-xCamera+100);
+        sprite.setX(this.x-xCamera+50);
         sprite.setY(winHeight-this.y-100-50);
         lastCall=time;
     }
@@ -57,15 +59,13 @@ public class Hero extends AnimatedThing{
 
         switch (state){
             case "running":
-                indexMax = 5;
                 index = (index + 1) % indexMax;
                 sprite.setViewport(new Rectangle2D(85 * index, 0, 85, 100));
                 break;
 
             case "runningAndShooting":
-                indexMax = 5;
                 index = (index + 1) % indexMax;
-                sprite.setViewport(new Rectangle2D(8 * index, 324, 85, 100));
+                sprite.setViewport(new Rectangle2D(80 * index, 324, 80, 100));
                 break;
 
             case "jumpingUp":
@@ -103,5 +103,11 @@ public class Hero extends AnimatedThing{
 
     public void sprint(){
         ax=1. * (85 / 1.70);
+    }
+
+    public Boolean isSprinting(){ return ax > 0.; }
+
+    public void shoot(){
+        state = "runningAndShooting";
     }
 }

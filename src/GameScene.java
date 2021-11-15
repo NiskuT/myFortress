@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -15,10 +16,12 @@ public class GameScene extends Scene {
     private Hero personnage;
     private staticThing context;
     private HashMap<String, Boolean> currentlyActiveKeys = new HashMap<>();
+    private ArrayList<Projectile> shoot = new ArrayList<Projectile>();
+    private Group root;
 
     public GameScene(Group root, Integer length, Integer height, boolean z) {
         super(root,length,height,z);
-
+        this.root = root;
         camera = new Camera(Double.valueOf(0),Double.valueOf(0));
         context = new staticThing(Double.valueOf(0),Double.valueOf(0), 5);
         personnage = new Hero();
@@ -33,17 +36,18 @@ public class GameScene extends Scene {
                 if( lastTimerCall + timerate < now){
                     lastTimerCall=now;
                     handleKey();
+                    shoot.forEach((ball) -> ball.update(camera.getX(), now));
                     personnage.update(camera.getX(),now);
                     camera.update(now, Double.valueOf(personnage.getX()));
-                    context.update(camera.getX(), Double.valueOf(0));
+                    context.update(camera.getX(), 0.);
                 }
             }
         };
 
         timer.start();
 
-        root.getChildren().add(context);
-        root.getChildren().add(personnage.getSprite());
+        this.root.getChildren().add(context);
+        this.root.getChildren().add(personnage.getSprite());
 
 
     }
@@ -70,6 +74,14 @@ public class GameScene extends Scene {
         if (currentlyActiveKeys.get("SHIFT")!=null && currentlyActiveKeys.get("SHIFT")) {
             personnage.sprint();
             currentlyActiveKeys.put("SHIFT", false);
+        }
+        if (currentlyActiveKeys.get("ALT")!=null && currentlyActiveKeys.get("ALT")) {
+            currentlyActiveKeys.put("ALT", false);
+            if (shoot.size() <=2){
+                shoot.add(new Projectile(personnage.getX(), personnage.getY(), personnage.isSprinting()));
+                root.getChildren().add(shoot.get(shoot.size()-1).getSprite());
+                personnage.shoot();
+            }
         }
     }
 

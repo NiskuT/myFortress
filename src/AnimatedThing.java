@@ -28,7 +28,7 @@ public abstract class AnimatedThing {
 
     protected boolean doubleJump = false;
 
-    public AnimatedThing(Double x, Double y,String fileName, Integer attitude) {
+    public AnimatedThing(Double x, Double y,String fileName, Integer indexMax) {
 
 
         this.x = x;
@@ -41,6 +41,7 @@ public abstract class AnimatedThing {
         index = 0;
         state = "running";
         prevState = "";
+        this.indexMax = indexMax;
     }
 
     public ImageView getSprite() {

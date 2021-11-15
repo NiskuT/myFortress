@@ -8,14 +8,11 @@ public class Foe extends AnimatedThing {
 
         ax = Double.valueOf(0);
         vx = Double.valueOf(6 * (85 / 1.70));
-        this.x = x;
 
         ay = Double.valueOf(-9.81 * (85 / 1.70));
         vy = Double.valueOf(0);
-        this.y = y;
 
 
-        this.fileName = fileName;
         this.sprite = new ImageView(new Image(fileName));
 
 
