@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 public class Hero extends AnimatedThing{
     private Double vmax = 9. * (85 / 1.70);
     private Double vmin = 6. * (85 / 1.70);
+    private int imShooting = 4;
 
     public Hero() {
         super(50., 0., "ressources/heros.png", 6);
@@ -27,26 +28,15 @@ public class Hero extends AnimatedThing{
 
         vy+=ay*(time-lastCall)*Math.pow(10,-9);
         y+=vy*(time-lastCall)*Math.pow(10,-9);
-        System.out.println("personnage: "+y.toString());
 
         if (y<=0) {
-            vy = Double.valueOf(0);
-            y = Double.valueOf(0);
+            vy = 0.;
+            y = 0.;
             doubleJump = false;
-            //state = "running";
         }
-/*
-        if (vy<0){
-            state = "jumpingDown";
-        }*/
 
-        if (vx>vmax){
-            ax = -ax;
-        }
-        else if (vx<vmin){
-            ax = 0.;
-            vx = vmin;
-        }
+
+
 
         selectViewPort();
         sprite.setX(this.x-xCamera+50);
@@ -61,27 +51,72 @@ public class Hero extends AnimatedThing{
             case "running":
                 index = (index + 1) % indexMax;
                 sprite.setViewport(new Rectangle2D(85 * index, 0, 85, 100));
+                if (vx>vmax){
+                    ax = -ax;
+                }
+                else if (vx<vmin){
+                    ax = 0.;
+                    vx = vmin;
+                }
                 break;
 
             case "runningAndShooting":
                 index = (index + 1) % indexMax;
-                sprite.setViewport(new Rectangle2D(80 * index, 324, 80, 100));
+                sprite.setViewport(new Rectangle2D(85 * index, 324, 85, 100));
+                imShooting--;
+                if (imShooting<=0){
+                    imShooting = 4;
+                    state = "running";
+                }
+                if (vx>vmax){
+                    ax = -ax;
+                }
+                else if (vx<vmin){
+                    ax = 0.;
+                    vx = vmin;
+                }
                 break;
 
             case "jumpingUp":
                 sprite.setViewport(new Rectangle2D(0, 163, 85, 100));
+                if (vy<0){
+                    state = "jumpingDown";
+                }
                 break;
 
             case "jumpingDown":
                 sprite.setViewport(new Rectangle2D(85, 163, 85, 100));
+                if (y==0) state = "running";
                 break;
 
             case "jumpingUpAndShooting":
                 sprite.setViewport(new Rectangle2D(0, 491, 85, 100));
+                imShooting--;
+                if (imShooting!=0 && vy<0){
+                    state = "jumpingDownAndShooting";
+                }
+                else if (imShooting==0){
+                    imShooting = 4;
+                    state="jumpingUp";
+                }
+                else if (vy<0){
+                    imShooting = 4;
+                    state="jumpingDown";
+                }
                 break;
 
             case "jumpingDownAndShooting":
+                imShooting--;
                 sprite.setViewport(new Rectangle2D(85, 491, 85, 100));
+                if (y==0 && imShooting!=0) state = "runningAndShooting";
+                else if (y==0){
+                    imShooting=4;
+                    state="running";
+                }
+                else if (imShooting<=0){
+                    imShooting=4;
+                    state="jumpingDown";
+                }
                 break;
 
         }
@@ -91,13 +126,16 @@ public class Hero extends AnimatedThing{
     public void jump() {
         if (y == 0) {
             vy = Double.valueOf(7 * (85 / 1.70));
-            state = "jumpingUp";
+            if (state.compareTo("runningAndShooting")==0)  state = "jumpingUpAndShooting";
+            else if(state.compareTo("running")==0)  state = "jumpingUp";
         }
 
         else if (!doubleJump) {
             doubleJump = true;
             vy = Double.valueOf(5 * (85 / 1.70));
             state = "jumpingUp";
+            if (state.compareTo("jumpingUpAndShooting")==0 || state.compareTo("jumpingDownAndShooting")==0)  state = "jumpingUpAndShooting";
+            else state = "jumpingUp";
         }
     }
 
@@ -108,6 +146,9 @@ public class Hero extends AnimatedThing{
     public Boolean isSprinting(){ return ax > 0.; }
 
     public void shoot(){
-        state = "runningAndShooting";
+        if (state.compareTo("running")==0) state = "runningAndShooting";
+        else if (state.compareTo("jumpingUp")==0) state = "jumpingUpAndShooting";
+        else if (state.compareTo("jumpingDown")==0) state = "jumpingDownAndShooting";
+
     }
 }

@@ -36,7 +36,7 @@ public class GameScene extends Scene {
                 if( lastTimerCall + timerate < now){
                     lastTimerCall=now;
                     handleKey();
-                    shoot.forEach((ball) -> ball.update(camera.getX(), now));
+                    updateShoot(now);
                     personnage.update(camera.getX(),now);
                     camera.update(now, Double.valueOf(personnage.getX()));
                     context.update(camera.getX(), 0.);
@@ -50,6 +50,20 @@ public class GameScene extends Scene {
         this.root.getChildren().add(personnage.getSprite());
 
 
+    }
+
+    private void updateShoot(long now){
+        ArrayList<Projectile> toRemove = new ArrayList<Projectile>();
+        shoot.forEach((ball) -> {
+            if (ball.getFinish()){
+                root.getChildren().remove(ball.getSprite());
+                toRemove.add(ball);
+            }
+            else{
+                ball.update(camera.getX(), now);
+            }
+        });
+        toRemove.forEach((ball)-> shoot.remove(ball));
     }
 
     private void keyboard(){
@@ -77,7 +91,7 @@ public class GameScene extends Scene {
         }
         if (currentlyActiveKeys.get("ALT")!=null && currentlyActiveKeys.get("ALT")) {
             currentlyActiveKeys.put("ALT", false);
-            if (shoot.size() <=2){
+            if (shoot.size() <2){
                 shoot.add(new Projectile(personnage.getX(), personnage.getY(), personnage.isSprinting()));
                 root.getChildren().add(shoot.get(shoot.size()-1).getSprite());
                 personnage.shoot();

@@ -3,7 +3,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Projectile extends AnimatedThing{
-    private int timeBeforeExplosion = 8;
+    private int timeBeforeExplosion = 6;
+    private Boolean finish = false;
 
     public Projectile(Double x, Double y, Boolean sprint) {
         super(x+85, y+50, "ressources/shooting.png", 5);
@@ -60,7 +61,11 @@ public class Projectile extends AnimatedThing{
 
             case "explose":
                 indexMax = 6;
-                index = (index + 1) % indexMax;
+                index++ ;
+                if (index>indexMax) {
+                    finish = true;
+                    break;
+                }
                 sprite.setViewport(new Rectangle2D(70*index, 100, 70, 70));
                 sprite.setX(this.x-xCamera+35);
                 sprite.setY(winHeight-this.y-35-50);
@@ -69,5 +74,9 @@ public class Projectile extends AnimatedThing{
 
         }
         prevState = state;
+    }
+
+    public Boolean getFinish() {
+        return finish;
     }
 }
