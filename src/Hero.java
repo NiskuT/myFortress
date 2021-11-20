@@ -35,9 +35,6 @@ public class Hero extends AnimatedThing{
             doubleJump = false;
         }
 
-
-
-
         selectViewPort();
         sprite.setX(this.x-xCamera+50);
         sprite.setY(winHeight-this.y-100-50);
