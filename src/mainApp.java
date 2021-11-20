@@ -16,9 +16,10 @@ public class mainApp extends Application {
 
         Group root = new Group();
 
-        Scene theScene = new GameScene(root, 600, 400,true);
+        Scene theScene = new GameScene(root, 800, 400,true);
 
         primaryStage.setScene(theScene);
+        primaryStage.setResizable(false);
 
         primaryStage.show();
     }

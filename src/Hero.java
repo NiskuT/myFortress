@@ -5,7 +5,9 @@ import javafx.scene.image.ImageView;
 public class Hero extends AnimatedThing{
     private Double vmax = 9. * (85 / 1.70);
     private Double vmin = 6. * (85 / 1.70);
-    private int imShooting = 4;
+    private int timeShooting = 20;
+    private int imShooting = timeShooting;
+    private int invincibilityTime = 1000;
 
     public Hero() {
         super(50., 0., "ressources/heros.png", 6);
@@ -23,6 +25,7 @@ public class Hero extends AnimatedThing{
 
     public void update(Double xCamera, long time){
         if( lastCall==0) lastCall = time;
+        if (invincibilityTime!=0) invincibilityTime--;
         vx+=ax*(time-lastCall)*Math.pow(10,-9);
         x+=vx*(time-lastCall)*Math.pow(10,-9);
 
@@ -35,102 +38,95 @@ public class Hero extends AnimatedThing{
             doubleJump = false;
         }
 
+        if (vx>vmax){
+            ax = -ax;
+        }
+        else if (vx<vmin){
+            ax = 0.;
+            vx = vmin;
+        }
+
         selectViewPort();
-        sprite.setX(this.x-xCamera+50);
+        sprite.setX(this.x-xCamera);
         sprite.setY(winHeight-this.y-100-50);
         lastCall=time;
     }
 
     private void selectViewPort(){
-        if (prevState.compareTo(state)!=0) index = 0;
+        if (prevState.compareTo(state)!=0 && !state.contains("Shooting")) index = 0;
 
-        switch (state){
-            case "running":
-                index = (index + 1) % indexMax;
+        switch (state) {
+            case "running" -> {
+                //index = (index + 1) % indexMax;
+                indexMax = 6;
                 sprite.setViewport(new Rectangle2D(85 * index, 0, 85, 100));
-                if (vx>vmax){
-                    ax = -ax;
-                }
-                else if (vx<vmin){
-                    ax = 0.;
-                    vx = vmin;
-                }
-                break;
-
-            case "runningAndShooting":
-                index = (index + 1) % indexMax;
+            }
+            case "runningAndShooting" -> {
+                indexMax = 6;
                 sprite.setViewport(new Rectangle2D(85 * index, 324, 85, 100));
                 imShooting--;
-                if (imShooting<=0){
-                    imShooting = 4;
+                if (imShooting <= 0) {
+                    imShooting = timeShooting;
                     state = "running";
                 }
-                if (vx>vmax){
-                    ax = -ax;
-                }
-                else if (vx<vmin){
-                    ax = 0.;
-                    vx = vmin;
-                }
-                break;
-
-            case "jumpingUp":
+            }
+            case "jumpingUp" -> {
+                indexMax = 1;
                 sprite.setViewport(new Rectangle2D(0, 163, 85, 100));
-                if (vy<0){
+                if (vy < 0) {
                     state = "jumpingDown";
                 }
-                break;
-
-            case "jumpingDown":
+            }
+            case "jumpingDown" -> {
+                indexMax = 1;
                 sprite.setViewport(new Rectangle2D(85, 163, 85, 100));
-                if (y==0) state = "running";
-                break;
-
-            case "jumpingUpAndShooting":
+                if (y == 0) state = "running";
+            }
+            case "jumpingUpAndShooting" -> {
+                indexMax = 1;
                 sprite.setViewport(new Rectangle2D(0, 491, 85, 100));
                 imShooting--;
-                if (imShooting!=0 && vy<0){
+                if (imShooting != 0 && vy < 0) {
                     state = "jumpingDownAndShooting";
+                } else if (imShooting == 0) {
+                    imShooting = timeShooting;
+                    state = "jumpingUp";
+                } else if (vy < 0) {
+                    imShooting = timeShooting;
+                    state = "jumpingDown";
                 }
-                else if (imShooting==0){
-                    imShooting = 4;
-                    state="jumpingUp";
-                }
-                else if (vy<0){
-                    imShooting = 4;
-                    state="jumpingDown";
-                }
-                break;
-
-            case "jumpingDownAndShooting":
+            }
+            case "jumpingDownAndShooting" -> {
+                indexMax = 1;
                 imShooting--;
                 sprite.setViewport(new Rectangle2D(85, 491, 85, 100));
-                if (y==0 && imShooting!=0) state = "runningAndShooting";
-                else if (y==0){
-                    imShooting=4;
-                    state="running";
+                if (y == 0 && imShooting != 0) state = "runningAndShooting";
+                else if (y == 0) {
+                    imShooting = timeShooting;
+                    state = "running";
+                } else if (imShooting <= 0) {
+                    imShooting = timeShooting;
+                    state = "jumpingDown";
                 }
-                else if (imShooting<=0){
-                    imShooting=4;
-                    state="jumpingDown";
-                }
-                break;
-
+            }
         }
         prevState = state;
     }
 
+    public void updateSprite(){
+        index = (index+1)%indexMax;
+    }
+
     public void jump() {
         if (y == 0) {
-            vy = Double.valueOf(7 * (85 / 1.70));
+            vy = 7 * (85 / 1.70);
             if (state.compareTo("runningAndShooting")==0)  state = "jumpingUpAndShooting";
             else if(state.compareTo("running")==0)  state = "jumpingUp";
         }
 
         else if (!doubleJump) {
             doubleJump = true;
-            vy = Double.valueOf(5 * (85 / 1.70));
-            state = "jumpingUp";
+            vy = 5 * (85 / 1.70);
             if (state.compareTo("jumpingUpAndShooting")==0 || state.compareTo("jumpingDownAndShooting")==0)  state = "jumpingUpAndShooting";
             else state = "jumpingUp";
         }
@@ -147,5 +143,13 @@ public class Hero extends AnimatedThing{
         else if (state.compareTo("jumpingUp")==0) state = "jumpingUpAndShooting";
         else if (state.compareTo("jumpingDown")==0) state = "jumpingDownAndShooting";
 
+    }
+
+    public boolean isInv(){
+        return invincibilityTime != 0;
+    }
+
+    public void hit(){
+        invincibilityTime = 1000;
     }
 }

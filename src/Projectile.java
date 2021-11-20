@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Projectile extends AnimatedThing{
-    private int timeBeforeExplosion = 6;
+    private int timeBeforeExplosion = 20;
     private Boolean finish = false;
 
     public Projectile(Double x, Double y, Boolean sprint) {
@@ -23,7 +23,6 @@ public class Projectile extends AnimatedThing{
 
     public void update(Double xCamera, long time){
         if( lastCall==0) lastCall = time;
-        System.out.println(x);
         if (state.compareTo("explose")!=0) {
 
             vx += ax * (time - lastCall) * Math.pow(10, -9);
@@ -42,38 +41,35 @@ public class Projectile extends AnimatedThing{
 
         if (prevState.compareTo(state)!=0) index = 0;
 
-        switch (state){
-            case "classic":
+        switch (state) {
+            case "classic" -> {
                 indexMax = 3;
-                index = (index + 1) % indexMax;
                 sprite.setViewport(new Rectangle2D(40 * index, 0, 40, 40));
-                sprite.setX(this.x-xCamera+50);
-                sprite.setY(winHeight-this.y-20-50);
-                break;
-
-            case "sprint":
+                sprite.setX(this.x - xCamera + 50);
+                sprite.setY(winHeight - this.y - 20 - 50);
+            }
+            case "sprint" -> {
                 indexMax = 3;
-                index = (index + 1) % indexMax;
                 sprite.setViewport(new Rectangle2D(90 * index, 40, 90, 60));
-                sprite.setX(this.x-xCamera+50);
-                sprite.setY(winHeight-this.y-30-50);
-                break;
-
-            case "explose":
-                indexMax = 6;
-                index++ ;
-                if (index>indexMax) {
+                sprite.setX(this.x - xCamera + 50);
+                sprite.setY(winHeight - this.y - 30 - 50);
+            }
+            case "explose" -> {
+                indexMax = 7;
+                if (index >= indexMax - 1) {
                     finish = true;
                     break;
                 }
-                sprite.setViewport(new Rectangle2D(70*index, 100, 70, 70));
-                sprite.setX(this.x-xCamera+35);
-                sprite.setY(winHeight-this.y-35-50);
-                break;
-
-
+                sprite.setViewport(new Rectangle2D(70 * index, 100, 70, 70));
+                sprite.setX(this.x - xCamera + 35);
+                sprite.setY(winHeight - this.y - 35 - 50);
+            }
         }
         prevState = state;
+    }
+
+    public void updateSprite(){
+        index = (index+1)%indexMax;
     }
 
     public Boolean getFinish() {

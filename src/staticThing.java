@@ -43,7 +43,7 @@ public class staticThing extends Pane{
 
 
         Image coeur = new Image(heart);
-        lives = new ArrayList<ImageView>();
+        lives = new ArrayList<>();
 
         for (int k=0; k<numberOfLives;k++){
             lives.add(new ImageView(coeur) );
@@ -64,7 +64,7 @@ public class staticThing extends Pane{
     }
 
     public void update(Double x, Double y){
-        this.x = Double.valueOf(x%lengthBackground);
+        this.x = x % lengthBackground;
         this.y = y;
         this.updateCoor();
 
@@ -77,4 +77,12 @@ public class staticThing extends Pane{
         backRight.setY(this.y);
     }
 
+    public ArrayList<ImageView> getLives() {
+        return lives;
+    }
+
+    public boolean removeLastLife() {
+        lives.remove(lives.size()-1);
+        return lives.size() != 0;
+    }
 }

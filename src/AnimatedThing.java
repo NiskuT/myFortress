@@ -27,6 +27,7 @@ public abstract class AnimatedThing {
     protected Integer winWidth = 600;
 
     protected boolean doubleJump = false;
+    private boolean alive = true;
 
     public AnimatedThing(Double x, Double y,String fileName, Integer indexMax) {
 
@@ -56,6 +57,14 @@ public abstract class AnimatedThing {
 
     public Double getY() {
         return y;
+    }
+
+    public boolean isAlive(){
+        return alive;
+    }
+
+    public void isDead(){
+        alive = false;
     }
 
 
