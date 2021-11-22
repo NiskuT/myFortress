@@ -101,6 +101,7 @@ public class GameScene extends Scene {
     }
 
     private void checkCollision(){
+
         wolf.forEach((ennemy)->{
             shoot.forEach((ball)->{
                 if (ball.isAlive() && ennemy.isAlive() && isInCollision(ennemy.getSprite(), ball.getSprite())){
@@ -109,8 +110,8 @@ public class GameScene extends Scene {
                 }
             });
 
-            if(ennemy.isAlive() && isInCollision(ennemy.getSprite(), personnage.getSprite()) && !personnage.isInv()){
-                context.getChildren().remove(context.getLives().get(context.getLives().size()));
+            if(ennemy.isAlive() && isInCollision(ennemy.getSprite(), personnage.getSprite()) && !personnage.isInv() && personnage.isAlive()){
+                context.getChildren().remove(context.getLives().get(context.getLives().size()-1));
                 if (context.removeLastLife()) personnage.isDead();
                 else{
                     personnage.hit();

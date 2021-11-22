@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="89ad8922-387e-4cf9-bbe5-bff579380d26" name="Changes" comment="Adding enemy sprite, collision, ajusting shoot, set window not rezizable...">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/staticThing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/staticThing.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="20wyxGdkK0bMjE2vF45bwdYAxw6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Program Files (x86)/javafx/javafx-sdk-17.0.1/lib" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="mainApp" />
+      <module name="myFortress" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;D:\Program Files (x86)\javafx\javafx-sdk-17.0.1\lib&quot; --add-modules javafx.controls" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89ad8922-387e-4cf9-bbe5-bff579380d26" name="Changes" comment="" />
+      <created>1636970189865</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1636970189865</updated>
+      <workItem from="1636970191976" duration="101000" />
+      <workItem from="1636971414602" duration="7522000" />
+      <workItem from="1637007442060" duration="7690000" />
+      <workItem from="1637424958113" duration="14951000" />
+      <workItem from="1637496475889" duration="209000" />
+      <workItem from="1637569017499" duration="1172000" />
+    </task>
+    <task id="LOCAL-00001" summary="Modification of the camera equations&#10;Added of the projectile class&#10;creating projectile sprite&#10;Added keyboard event handler&#10;Added sprint feature for the hero">
+      <created>1636985219895</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1636985219895</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added shoot features for the hero">
+      <created>1637020594687</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1637020594687</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added shoot features for the hero">
+      <created>1637020614660</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1637020614660</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added gitignore">
+      <created>1637425367850</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1637425367850</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adding enemy sprite, collision, ajusting shoot, set window not rezizable...">
+      <created>1637450943190</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1637450943190</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modification of the camera equations&#10;Added of the projectile class&#10;creating projectile sprite&#10;Added keyboard event handler&#10;Added sprint feature for the hero" />
+    <MESSAGE value="added shoot features for the hero" />
+    <MESSAGE value="added gitignore" />
+    <MESSAGE value="Adding enemy sprite, collision, ajusting shoot, set window not rezizable..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding enemy sprite, collision, ajusting shoot, set window not rezizable..." />
+  </component>
+</project>

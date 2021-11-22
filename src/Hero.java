@@ -7,7 +7,7 @@ public class Hero extends AnimatedThing{
     private Double vmin = 6. * (85 / 1.70);
     private int timeShooting = 20;
     private int imShooting = timeShooting;
-    private int invincibilityTime = 1000;
+    private Integer invincibilityTime = 0;
 
     public Hero() {
         super(50., 0., "ressources/heros.png", 6);
@@ -150,6 +150,6 @@ public class Hero extends AnimatedThing{
     }
 
     public void hit(){
-        invincibilityTime = 1000;
+        invincibilityTime = 40;
     }
 }

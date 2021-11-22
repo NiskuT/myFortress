@@ -83,6 +83,6 @@ public class staticThing extends Pane{
 
     public boolean removeLastLife() {
         lives.remove(lives.size()-1);
-        return lives.size() != 0;
+        return lives.size() == 0;
     }
 }
