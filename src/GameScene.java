@@ -31,7 +31,6 @@ public class GameScene extends Scene {
 
         AnimationTimer timer = new AnimationTimer() {
             long lastTimerCall=0;
-            //int timerate = 75000000;
             int timerate = 750000;
             @Override
             public void handle(long now) {

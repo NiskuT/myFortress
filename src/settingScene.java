@@ -1,4 +1,3 @@
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -6,22 +5,15 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.paint.Color;
-import javafx.stage.Window;
-import javafx.stage.WindowEvent;
 
-public class homePage extends Scene {
+public class settingScene extends Scene {
+    private boolean isMenu = false;
+    private boolean isClose = false;
     private Group root;
-    private Button play;
+    private Button menu;
     private Button leave;
-    private Button settings;
 
-    private boolean isClose =false;
-    private boolean isPlay = false;
-    private boolean isSetting = false;
-
-    public homePage(Group root, Integer length, Integer height) {
+    public settingScene(Group root, Integer length, Integer height) {
         super(root, length, height);
         this.root = root;
 
@@ -30,26 +22,23 @@ public class homePage extends Scene {
 
     private void init(){
         root.getChildren().add( new ImageView(new Image("ressources/desert.png")));
-        play = new Button("Jouer");
+        menu = new Button("Menu");
         leave = new Button("Quitter");
-        settings = new Button("Paramètres");
+
         setButton();
 
-        root.getChildren().add(play);
+        root.getChildren().add(menu);
         root.getChildren().add(leave);
-        root.getChildren().add(settings);
+
     }
 
     private void setButton(){
-
-        play.setLayoutX(70.);
-        play.setLayoutY(175.);
+        menu.setLayoutX(70.);
+        menu.setLayoutY(175.);
         leave.setLayoutX(320.);
         leave.setLayoutY(175.);
-        settings.setLayoutX(165.);
-        settings.setLayoutY(250.);
 
-        play.setStyle("-fx-font: 40 Impact;" +
+        menu.setStyle("-fx-font: 40 Impact;" +
                 "-fx-font-weight: bold;"+
                 "-fx-text-fill: black;"+
                 "-fx-background-color: transparent;" +
@@ -65,16 +54,10 @@ public class homePage extends Scene {
                 "-fx-border-radius: 20, 20;"
         );
 
-        settings.setStyle("-fx-font: 30 Impact;" +
-                "-fx-font-weight: bold;"+
-                "-fx-text-fill: black;"+
-                "-fx-background-color: transparent;"
-        );
-
-        play.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+        menu.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                play.setStyle("-fx-font: 40 Impact;" +
+                menu.setStyle("-fx-font: 40 Impact;" +
                         "-fx-font-weight: bold;"+
                         "-fx-text-fill: yellow;"+
                         "-fx-background-color: transparent;" +
@@ -84,11 +67,11 @@ public class homePage extends Scene {
                 );
             }
         });
-        play.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+        menu.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
 
-                play.setStyle("-fx-font: 40 Impact;" +
+                menu.setStyle("-fx-font: 40 Impact;" +
                         "-fx-font-weight: bold;"+
                         "-fx-text-fill: black;"+
                         "-fx-background-color: transparent;" +
@@ -100,10 +83,10 @@ public class homePage extends Scene {
             }
         });
 
-        play.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        menu.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                isPlay=true;
+                isMenu=true;
             }
         });
 
@@ -140,51 +123,17 @@ public class homePage extends Scene {
                 isClose=true;
             }
         });
+    }
 
-        settings.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                settings.setStyle("-fx-font: 30 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: yellow;"+
-                        "-fx-background-color: transparent;"
-                );
-            }
-        });
-        settings.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-
-                settings.setStyle("-fx-font: 30 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: black;"+
-                        "-fx-background-color: transparent;"
-                );
-            }
-        });
-
-        settings.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                isSetting=true;
-            }
-        });
+    public boolean isMenu() {
+        return isMenu;
     }
 
     public boolean isClose() {
         return isClose;
     }
-
-    public boolean isPlay() {
-        return isPlay;
-    }
-
-    public boolean isSetting() {
-        return isSetting;
-    }
     public void resetState(){
-        isSetting=false;
-        isPlay=false;
+        isMenu=false;
         isClose=false;
     }
 }
