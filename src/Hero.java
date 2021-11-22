@@ -7,7 +7,10 @@ public class Hero extends AnimatedThing{
     private Double vmin = 6. * (85 / 1.70);
     private int timeShooting = 20;
     private int imShooting = timeShooting;
-    private Integer invincibilityTime = 0;
+
+    private int invincibilityTime = 750000000;
+    private boolean invincible = false;
+    private long lastTimeHit = 0;
 
     private long actualTime = 0;
     private long lastTimeShoot = 0;
@@ -31,7 +34,9 @@ public class Hero extends AnimatedThing{
     public void update(Double xCamera, long time){
         if( lastCall==0) lastCall = time;
         updateTime(time);
-        if (invincibilityTime!=0) invincibilityTime--;
+
+        if(invincible && actualTime-lastTimeHit>invincibilityTime) invincible = false;
+
         vx+=ax*(time-lastCall)*Math.pow(10,-9);
         x+=vx*(time-lastCall)*Math.pow(10,-9);
 
@@ -162,10 +167,11 @@ public class Hero extends AnimatedThing{
     }
 
     public boolean isInv(){
-        return invincibilityTime != 0;
+        return invincible;
     }
 
     public void hit(){
-        invincibilityTime = 40;
+        lastTimeHit = actualTime;
+        invincible = true;
     }
 }

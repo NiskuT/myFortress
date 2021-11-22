@@ -15,7 +15,7 @@ public class Foe extends AnimatedThing {
         state = "walking";
         sprite.setViewport(new Rectangle2D(0, 0, 110, 60));
         sprite.setX(this.x);
-        sprite.setY(winHeight - this.y - 100 - 50); // 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center the hero)
+        sprite.setY(winHeight - this.y - 100 - 50); // 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center)
 
 
     }

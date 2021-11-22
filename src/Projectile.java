@@ -3,8 +3,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Projectile extends AnimatedThing{
-    private int timeBeforeExplosion = 20;
+    private int timeBeforeExplosion = 400000000;
     private Boolean finish = false;
+    private long actualTime = 0;
+    private long timeStart = 0;
 
     public Projectile(Double x, Double y, Boolean sprint) {
         super(x+85, y+50, "ressources/shooting.png", 5);
@@ -23,18 +25,20 @@ public class Projectile extends AnimatedThing{
 
     public void update(Double xCamera, long time){
         if( lastCall==0) lastCall = time;
+        if(timeStart==0) timeStart = time;
+        updateTime(time);
+
         if (state.compareTo("explose")!=0) {
 
             vx += ax * (time - lastCall) * Math.pow(10, -9);
             x += vx * (time - lastCall) * Math.pow(10, -9);
         }
 
-        if (timeBeforeExplosion==0) state = "explose";
+        if (actualTime-timeStart>timeBeforeExplosion) state = "explose";
 
         selectViewPort(xCamera);
 
         lastCall=time;
-        timeBeforeExplosion--;
     }
 
     private void selectViewPort(Double xCamera){
@@ -66,6 +70,10 @@ public class Projectile extends AnimatedThing{
             }
         }
         prevState = state;
+    }
+
+    private void updateTime(long t){
+        actualTime=t;
     }
 
     public void updateSprite(){

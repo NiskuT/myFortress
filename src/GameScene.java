@@ -17,7 +17,7 @@ public class GameScene extends Scene {
     private staticThing context;
     private HashMap<String, Boolean> currentlyActiveKeys = new HashMap<>();
     private ArrayList<Projectile> shoot = new ArrayList<>();
-    private ArrayList<Foe> wolf = new ArrayList<>();
+    private ArrayList<AnimatedThing> ennemies = new ArrayList<>();
     private Group root;
 
     public GameScene(Group root, Integer length, Integer height, boolean z) {
@@ -35,6 +35,7 @@ public class GameScene extends Scene {
             int timerate = 750000;
             @Override
             public void handle(long now) {
+                if(!personnage.isAlive()) stop();
                 if( lastTimerCall + timerate < now){
                     lastTimerCall=now;
                     updateAll(now);
@@ -47,12 +48,16 @@ public class GameScene extends Scene {
             int timerate = 50000000;
             @Override
             public void handle(long now) {
+                if(!personnage.isAlive()){
+                    stop();
+                    // fct mort
+                }
                 if( lastTimerCall + timerate < now){
                     lastTimerCall=now;
                     personnage.updateSprite();
                     shoot.forEach(Projectile::updateSprite);
                     wolf.forEach(Foe::updateSprite);
-
+                    bird.forEach(flyingFoe::updateSprite);
                 }
             }
         };
@@ -79,9 +84,12 @@ public class GameScene extends Scene {
 
     private void summonEnemy(){
 
-        if (wolf.size() < 4 && Math.random() < 0.02) {
-            wolf.add(new Foe(personnage.getX() + 700 + (Math.random())*800));
-            root.getChildren().add(wolf.get(wolf.size()-1).getSprite());
+        if (ennemies.size() < 10 && Math.random() < 0.02) {
+
+            if(Math.random() < 0.4) ennemies.add(new Foe(personnage.getX() + 700 + (Math.random())*800));
+            else ennemies.add(new flyingFoe(personnage.getX() + 700 + (Math.random())*800));
+
+            root.getChildren().add(ennemies.get(ennemies.size()-1).getSprite());
         }
     }
 
@@ -97,7 +105,19 @@ public class GameScene extends Scene {
                 loup.update(camera.getX(), now);
             }
         });
-        toRemove.forEach((ball)-> wolf.remove(ball));
+        toRemove.forEach((loup)-> wolf.remove(loup));
+
+        ArrayList<flyingFoe> toRemoveBird = new ArrayList<>();
+        bird.forEach((oiseau) -> {
+            if (personnage.getX() - oiseau.getX() > 300. || !oiseau.isAlive()){
+                root.getChildren().remove(oiseau.getSprite());
+                toRemoveBird.add(oiseau);
+            }
+            else{
+                oiseau.update(camera.getX(), now);
+            }
+        });
+        toRemoveBird.forEach((oiseau)-> bird.remove(oiseau));
     }
 
     private void checkCollision(){
