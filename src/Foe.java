@@ -10,7 +10,6 @@ public class Foe extends AnimatedThing {
 
         vx = -2 * (85 / 1.70);
 
-        this.sprite = new ImageView(new Image(fileName));
 
         state = "walking";
         sprite.setViewport(new Rectangle2D(0, 0, 110, 60));
@@ -51,10 +50,7 @@ public class Foe extends AnimatedThing {
         prevState = state;
     }
 
-    public void updateSprite(){
-        index = (index+1)%indexMax;
-    }
-
+    @Override
     public void setxHero(Double xHero) {
         this.xHero = xHero;
     }

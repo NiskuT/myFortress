@@ -128,9 +128,6 @@ public class Hero extends AnimatedThing{
         prevState = state;
     }
 
-    public void updateSprite(){
-        index = (index+1)%indexMax;
-    }
 
     public void jump() {
         if (y == 0) {

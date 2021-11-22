@@ -20,8 +20,8 @@ public class GameScene extends Scene {
     private ArrayList<AnimatedThing> ennemies = new ArrayList<>();
     private Group root;
 
-    public GameScene(Group root, Integer length, Integer height, boolean z) {
-        super(root,length,height,z);
+    public GameScene(Group root, Integer length, Integer height) {
+        super(root,length,height);
         this.root = root;
         camera = new Camera(0.,0.);
         context = new staticThing(0.,0., 5);
@@ -56,8 +56,7 @@ public class GameScene extends Scene {
                     lastTimerCall=now;
                     personnage.updateSprite();
                     shoot.forEach(Projectile::updateSprite);
-                    wolf.forEach(Foe::updateSprite);
-                    bird.forEach(flyingFoe::updateSprite);
+                    ennemies.forEach(AnimatedThing::updateSprite);
                 }
             }
         };
@@ -94,43 +93,32 @@ public class GameScene extends Scene {
     }
 
     private void updateEnemy(long now){
-        ArrayList<Foe> toRemove = new ArrayList<>();
-        wolf.forEach((loup) -> {
-            if (personnage.getX() - loup.getX() > 300. || !loup.isAlive()){
-                root.getChildren().remove(loup.getSprite());
-                toRemove.add(loup);
+        ArrayList<AnimatedThing> toRemove = new ArrayList<>();
+        ennemies.forEach((enemy) -> {
+            if (personnage.getX() - enemy.getX() > 300. || !enemy.isAlive()){
+                root.getChildren().remove(enemy.getSprite());
+                toRemove.add(enemy);
             }
             else{
-                loup.setxHero(personnage.getX());
-                loup.update(camera.getX(), now);
+                enemy.setxHero(personnage.getX());
+                enemy.update(camera.getX(), now);
             }
         });
-        toRemove.forEach((loup)-> wolf.remove(loup));
+        toRemove.forEach((enemy)-> ennemies.remove(enemy));
 
-        ArrayList<flyingFoe> toRemoveBird = new ArrayList<>();
-        bird.forEach((oiseau) -> {
-            if (personnage.getX() - oiseau.getX() > 300. || !oiseau.isAlive()){
-                root.getChildren().remove(oiseau.getSprite());
-                toRemoveBird.add(oiseau);
-            }
-            else{
-                oiseau.update(camera.getX(), now);
-            }
-        });
-        toRemoveBird.forEach((oiseau)-> bird.remove(oiseau));
     }
 
     private void checkCollision(){
 
-        wolf.forEach((ennemy)->{
+        ennemies.forEach((enemy)->{
             shoot.forEach((ball)->{
-                if (ball.isAlive() && ennemy.isAlive() && isInCollision(ennemy.getSprite(), ball.getSprite())){
+                if (ball.isAlive() && enemy.isAlive() && isInCollision(enemy.getSprite(), ball.getSprite())){
                     ball.isDead();
-                    ennemy.isDead();
+                    enemy.isDead();
                 }
             });
 
-            if(ennemy.isAlive() && isInCollision(ennemy.getSprite(), personnage.getSprite()) && !personnage.isInv() && personnage.isAlive()){
+            if(enemy.isAlive() && isInCollision(enemy.getSprite(), personnage.getSprite()) && !personnage.isInv() && personnage.isAlive()){
                 context.getChildren().remove(context.getLives().get(context.getLives().size()-1));
                 if (context.removeLastLife()) personnage.isDead();
                 else{
@@ -138,7 +126,6 @@ public class GameScene extends Scene {
                 }
             }
         });
-
     }
 
     private Boolean isInCollision(ImageView a, ImageView b){

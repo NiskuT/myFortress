@@ -10,8 +10,6 @@ public class flyingFoe extends AnimatedThing {
 
         vx = -2 * (85 / 1.70);
 
-        this.sprite = new ImageView(new Image(fileName));
-
         state = "flying";
         sprite.setViewport(new Rectangle2D(0, 0, 73, 67));
         sprite.setX(this.x);

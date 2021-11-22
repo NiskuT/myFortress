@@ -67,5 +67,12 @@ public abstract class AnimatedThing {
         alive = false;
     }
 
+    public void updateSprite(){
+        index = (index+1)%indexMax;
+    }
+
+    public void setxHero(Double xHero) {
+    }
+
 
 }

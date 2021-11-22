@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89ad8922-387e-4cf9-bbe5-bff579380d26" name="Changes" comment="Updating sprite of the hero while shooting and destroy shoot object">
+    <list default="true" id="89ad8922-387e-4cf9-bbe5-bff579380d26" name="Changes" comment="Prevent spam shoot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myFortress/GameScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/GameScene$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myFortress/GameScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/GameScene$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myFortress/GameScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/GameScene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myFortress/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/Hero.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myFortress/Projectile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/Projectile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/myFortress/ressources/birdSprite.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/ressources/birdSprite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AnimatedThing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AnimatedThing.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Foe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projectile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ressources/birdSprite.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ressources/birdSprite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/flyingFoe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/flyingFoe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mainApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +51,7 @@
     <configuration name="main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="mainApp" />
       <module name="myFortress" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;/opt/javafx-sdk-17.0.0.1/lib&quot; --add-modules javafx.controls" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;D:\Program Files (x86)\javafx\javafx-sdk-17.0.1\lib&quot; --add-modules javafx.controls" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -70,6 +71,7 @@
       <workItem from="1637424958113" duration="14951000" />
       <workItem from="1637496475889" duration="209000" />
       <workItem from="1637569017499" duration="2266000" />
+      <workItem from="1637583766254" duration="5928000" />
     </task>
     <task id="LOCAL-00001" summary="Modification of the camera equations&#10;Added of the projectile class&#10;creating projectile sprite&#10;Added keyboard event handler&#10;Added sprint feature for the hero">
       <created>1636985219895</created>

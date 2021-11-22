@@ -14,7 +14,6 @@ public class Projectile extends AnimatedThing{
         ax = 0.7* (85 / 1.70);
         vx = 16. * (85 / 1.70);
 
-        this.sprite = new ImageView(new Image(fileName));
 
         index = 0;
         indexMax = 5;
@@ -76,9 +75,7 @@ public class Projectile extends AnimatedThing{
         actualTime=t;
     }
 
-    public void updateSprite(){
-        index = (index+1)%indexMax;
-    }
+
 
     public Boolean getFinish() {
         return finish;
