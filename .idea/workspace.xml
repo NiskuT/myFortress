@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89ad8922-387e-4cf9-bbe5-bff579380d26" name="Changes" comment="Adding enemy sprite, collision, ajusting shoot, set window not rezizable...">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="89ad8922-387e-4cf9-bbe5-bff579380d26" name="Changes" comment="Updated of collision">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myFortress/GameScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/GameScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myFortress/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/Hero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myFortress/Projectile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/Projectile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myFortress/staticThing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/staticThing.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/staticThing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/staticThing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projectile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +64,7 @@
       <workItem from="1637007442060" duration="7690000" />
       <workItem from="1637424958113" duration="14951000" />
       <workItem from="1637496475889" duration="209000" />
-      <workItem from="1637569017499" duration="1172000" />
+      <workItem from="1637569017499" duration="2266000" />
     </task>
     <task id="LOCAL-00001" summary="Modification of the camera equations&#10;Added of the projectile class&#10;creating projectile sprite&#10;Added keyboard event handler&#10;Added sprint feature for the hero">
       <created>1636985219895</created>
@@ -97,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637450943190</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Updated of collision">
+      <created>1637570396882</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1637570396882</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,6 +131,7 @@
     <MESSAGE value="added shoot features for the hero" />
     <MESSAGE value="added gitignore" />
     <MESSAGE value="Adding enemy sprite, collision, ajusting shoot, set window not rezizable..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding enemy sprite, collision, ajusting shoot, set window not rezizable..." />
+    <MESSAGE value="Updated of collision" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated of collision" />
   </component>
 </project>

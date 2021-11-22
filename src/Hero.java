@@ -9,6 +9,11 @@ public class Hero extends AnimatedThing{
     private int imShooting = timeShooting;
     private Integer invincibilityTime = 0;
 
+    private long actualTime = 0;
+    private long lastTimeShoot = 0;
+    private long freqOfShoot = 500000000;
+
+
     public Hero() {
         super(50., 0., "ressources/heros.png", 6);
 
@@ -25,6 +30,7 @@ public class Hero extends AnimatedThing{
 
     public void update(Double xCamera, long time){
         if( lastCall==0) lastCall = time;
+        updateTime(time);
         if (invincibilityTime!=0) invincibilityTime--;
         vx+=ax*(time-lastCall)*Math.pow(10,-9);
         x+=vx*(time-lastCall)*Math.pow(10,-9);
@@ -50,6 +56,10 @@ public class Hero extends AnimatedThing{
         sprite.setX(this.x-xCamera);
         sprite.setY(winHeight-this.y-100-50);
         lastCall=time;
+    }
+
+    private void updateTime(long t){
+        actualTime=t;
     }
 
     private void selectViewPort(){
@@ -138,10 +148,16 @@ public class Hero extends AnimatedThing{
 
     public Boolean isSprinting(){ return ax > 0.; }
 
-    public void shoot(){
-        if (state.compareTo("running")==0) state = "runningAndShooting";
-        else if (state.compareTo("jumpingUp")==0) state = "jumpingUpAndShooting";
-        else if (state.compareTo("jumpingDown")==0) state = "jumpingDownAndShooting";
+    public boolean shoot(){
+
+        if (actualTime -lastTimeShoot < freqOfShoot) return false;
+        else {
+            if (state.compareTo("running") == 0) state = "runningAndShooting";
+            else if (state.compareTo("jumpingUp") == 0) state = "jumpingUpAndShooting";
+            else if (state.compareTo("jumpingDown") == 0) state = "jumpingDownAndShooting";
+            lastTimeShoot=actualTime;
+            return true;
+        }
 
     }
 

@@ -164,10 +164,9 @@ public class GameScene extends Scene {
         }
         if (currentlyActiveKeys.get("ALT")!=null && currentlyActiveKeys.get("ALT")) {
             currentlyActiveKeys.put("ALT", false);
-            if (shoot.size() <2){
+            if (shoot.size() <2 && personnage.shoot()){
                 shoot.add(new Projectile(personnage.getX(), personnage.getY(), personnage.isSprinting()));
                 root.getChildren().add(shoot.get(shoot.size()-1).getSprite());
-                personnage.shoot();
             }
         }
     }

@@ -75,4 +75,10 @@ public class Projectile extends AnimatedThing{
     public Boolean getFinish() {
         return finish;
     }
+
+    @Override
+    public void isDead(){
+        state="explose";
+    }
+
 }
