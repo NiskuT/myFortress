@@ -187,22 +187,25 @@ public class GameScene extends Scene {
 
 
     private void gameOver(){
-
+        ImageView go = new ImageView(new Image("ressources/gameover.png"));
+        go.setX(180);
+        go.setY(35);
         menu = new Button("Menu");
         leave = new Button("Quitter");
 
         setButton();
 
+        root.getChildren().add(go);
         root.getChildren().add(menu);
         root.getChildren().add(leave);
 
     }
 
     private void setButton(){
-        menu.setLayoutX(70.);
-        menu.setLayoutY(175.);
-        leave.setLayoutX(320.);
-        leave.setLayoutY(175.);
+        menu.setLayoutX(160.);
+        menu.setLayoutY(460.);
+        leave.setLayoutX(500.);
+        leave.setLayoutY(460.);
 
         menu.setStyle("-fx-font: 40 Impact;" +
                 "-fx-font-weight: bold;"+
@@ -225,9 +228,9 @@ public class GameScene extends Scene {
             public void handle(MouseEvent e) {
                 menu.setStyle("-fx-font: 40 Impact;" +
                         "-fx-font-weight: bold;"+
-                        "-fx-text-fill: yellow;"+
+                        "-fx-text-fill: darkred;"+
                         "-fx-background-color: transparent;" +
-                        "-fx-border-color: yellow;" +
+                        "-fx-border-color: darkred;" +
                         "-fx-border-radius: 20, 20;"
 
                 );
@@ -261,9 +264,9 @@ public class GameScene extends Scene {
             public void handle(MouseEvent e) {
                 leave.setStyle("-fx-font: 40 Impact;" +
                         "-fx-font-weight: bold;"+
-                        "-fx-text-fill: yellow;"+
+                        "-fx-text-fill: darkred;"+
                         "-fx-background-color: transparent;" +
-                        "-fx-border-color: yellow;" +
+                        "-fx-border-color: darkred;" +
                         "-fx-border-radius: 20, 20;"
 
                 );
