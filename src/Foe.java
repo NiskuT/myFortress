@@ -14,7 +14,7 @@ public class Foe extends AnimatedThing {
         state = "walking";
         sprite.setViewport(new Rectangle2D(0, 0, 110, 60));
         sprite.setX(this.x);
-        sprite.setY(winHeight - this.y - 100 - 50); // 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center)
+        sprite.setY(winHeight - this.y - 100 - 60); // 0 is up so winHeight - y is height (+100 -> sprite height) (+60 center)
 
 
     }
@@ -28,7 +28,7 @@ public class Foe extends AnimatedThing {
         x+=vx*(time-lastCall)*Math.pow(10,-9);
 
         sprite.setX(this.x-xCamera+50);
-        sprite.setY(winHeight-this.y-60-50);
+        sprite.setY(winHeight-this.y-60-60);
         lastCall=time;
     }
 

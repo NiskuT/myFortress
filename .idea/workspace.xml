@@ -3,12 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="89ad8922-387e-4cf9-bbe5-bff579380d26" name="Changes" comment="Prevent spam shoot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myFortress/AnimatedThing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/AnimatedThing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myFortress/Foe.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/Foe.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myFortress/GameScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/GameScene$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myFortress/GameScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/GameScene$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myFortress/GameScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/GameScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myFortress/flyingFoe.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/flyingFoe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myFortress/mainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myFortress/mainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AnimatedThing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AnimatedThing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Foe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/flyingFoe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/flyingFoe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/homePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/homePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ressources/birdSprite2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/staticThing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/staticThing.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +55,7 @@
     <configuration name="main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="mainApp" />
       <module name="myFortress" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;/opt/javafx-sdk-17.0.0.1/lib&quot; --add-modules javafx.controls" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;D:\Program Files (x86)\javafx\javafx-sdk-17.0.1\lib&quot; --add-modules javafx.controls" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

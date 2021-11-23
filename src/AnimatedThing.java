@@ -23,8 +23,8 @@ public abstract class AnimatedThing {
     protected String prevState;
     protected long lastCall;
 
-    protected Integer winHeight = 400;
-    protected Integer winWidth = 600;
+    protected Integer winHeight = 618;
+    protected Integer winWidth = 900;
 
     protected boolean doubleJump = false;
     private boolean alive = true;

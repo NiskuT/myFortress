@@ -42,12 +42,12 @@ public class homePage extends Scene {
 
     private void setButton(){
 
-        play.setLayoutX(70.);
-        play.setLayoutY(175.);
-        leave.setLayoutX(320.);
-        leave.setLayoutY(175.);
-        settings.setLayoutX(165.);
-        settings.setLayoutY(250.);
+        play.setLayoutX(90.);
+        play.setLayoutY(135.);
+        leave.setLayoutX(340.);
+        leave.setLayoutY(135.);
+        settings.setLayoutX(190.);
+        settings.setLayoutY(230.);
 
         play.setStyle("-fx-font: 40 Impact;" +
                 "-fx-font-weight: bold;"+

@@ -50,7 +50,7 @@ public class mainApp extends Application {
                                 state = 2;
                                 menu.resetState();
                                 Group rootGame = new Group();
-                                theScene = new GameScene(rootGame, 800, 400);
+                                theScene = new GameScene(rootGame, 900, 618);
                                 primaryStage.setScene(theScene);
                             }
                         }
@@ -64,7 +64,12 @@ public class mainApp extends Application {
                             }
                         }
                         case 2 -> {
-
+                            if(theScene.isClose()) primaryStage.close();
+                            else if (theScene.isMenu()){
+                                state = 0;
+                                theScene.resetState();
+                                primaryStage.setScene(menu);
+                            }
                         }
                     }
                 }

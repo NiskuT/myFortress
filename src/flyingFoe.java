@@ -13,7 +13,7 @@ public class flyingFoe extends AnimatedThing {
         state = "flying";
         sprite.setViewport(new Rectangle2D(0, 0, 73, 67));
         sprite.setX(this.x);
-        sprite.setY(winHeight - this.y - 67 - 50); // 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center)
+        sprite.setY(winHeight - this.y - 67 - 60); // 0 is up so winHeight - y is height (+100 -> sprite height) (+50 center)
     }
 
     public void update(Double xCamera, long time){
@@ -23,7 +23,7 @@ public class flyingFoe extends AnimatedThing {
         x+=vx*(time-lastCall)*Math.pow(10,-9);
 
         sprite.setX(this.x-xCamera+50);
-        sprite.setY(winHeight-this.y-67-50);
+        sprite.setY(winHeight-this.y-67-60);
         lastCall=time;
     }
 

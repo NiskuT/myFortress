@@ -59,7 +59,7 @@ public class Hero extends AnimatedThing{
 
         selectViewPort();
         sprite.setX(this.x-xCamera);
-        sprite.setY(winHeight-this.y-100-50);
+        sprite.setY(winHeight-this.y-100-60);
         lastCall=time;
     }
 
