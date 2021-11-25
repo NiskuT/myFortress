@@ -1,8 +1,10 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +22,7 @@ public class homePage extends Scene {
     private boolean isClose =false;
     private boolean isPlay = false;
     private boolean isSetting = false;
+    private staticThing back;
 
     public homePage(Group root, Integer length, Integer height) {
         super(root, length, height);
@@ -29,7 +32,8 @@ public class homePage extends Scene {
     }
 
     private void init(){
-        root.getChildren().add( new ImageView(new Image("ressources/desert.png")));
+        back = new staticThing(0.,0.,0);
+        root.getChildren().add(back);
         play = new Button("Jouer");
         leave = new Button("Quitter");
         settings = new Button("Paramètres");
@@ -42,61 +46,48 @@ public class homePage extends Scene {
 
     private void setButton(){
 
-        play.setLayoutX(90.);
-        play.setLayoutY(135.);
-        leave.setLayoutX(340.);
-        leave.setLayoutY(135.);
-        settings.setLayoutX(190.);
-        settings.setLayoutY(230.);
+        settings.setLayoutX(345.);
+        settings.setLayoutY(350.);
+        play.setLayoutX(180.);
+        play.setLayoutY(250.);
+        leave.setLayoutX(520.);
+        leave.setLayoutY(250.);
 
-        play.setStyle("-fx-font: 40 Impact;" +
+        play.setEffect(new DropShadow(3, 3, 3, Color.web("#111111")));
+        leave.setEffect(new DropShadow(3, 3, 3, Color.web("#111111")));
+        settings.setEffect(new DropShadow(3, 3, 3, Color.web("#111111")));
+
+        String style1 = "-fx-font: 40 Impact;" +
                 "-fx-font-weight: bold;"+
                 "-fx-text-fill: black;"+
                 "-fx-background-color: transparent;" +
                 "-fx-border-color: transparent;" +
-                "-fx-border-radius: 20, 20;"
-        );
-
-        leave.setStyle("-fx-font: 40 Impact;" +
+                "-fx-border-radius: 20, 20;";
+        String style2 = "-fx-font: 40 Impact;" +
                 "-fx-font-weight: bold;"+
-                "-fx-text-fill: black;"+
+                "-fx-text-fill: darkred;"+
                 "-fx-background-color: transparent;" +
-                "-fx-border-color: transparent;" +
-                "-fx-border-radius: 20, 20;"
-        );
+                "-fx-border-color: darkred;" +
+                "-fx-border-radius: 20, 20;";
 
+        play.setStyle(style1);
+        leave.setStyle(style1);
         settings.setStyle("-fx-font: 30 Impact;" +
                 "-fx-font-weight: bold;"+
                 "-fx-text-fill: black;"+
-                "-fx-background-color: transparent;"
-        );
+                "-fx-background-color: transparent;");
 
         play.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                play.setStyle("-fx-font: 40 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: yellow;"+
-                        "-fx-background-color: transparent;" +
-                        "-fx-border-color: yellow;" +
-                        "-fx-border-radius: 20, 20;"
-
-                );
+                play.setStyle(style2);
             }
         });
         play.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
 
-                play.setStyle("-fx-font: 40 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: black;"+
-                        "-fx-background-color: transparent;" +
-                        "-fx-border-color: transparent;" +
-                        "-fx-border-radius: 20, 20;"
-
-                );
-
+                play.setStyle(style1);
             }
         });
 
@@ -110,28 +101,14 @@ public class homePage extends Scene {
         leave.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                leave.setStyle("-fx-font: 40 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: yellow;"+
-                        "-fx-background-color: transparent;" +
-                        "-fx-border-color: yellow;" +
-                        "-fx-border-radius: 20, 20;"
-
-                );
+                leave.setStyle(style2);
             }
         });
         leave.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
 
-                leave.setStyle("-fx-font: 40 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: black;"+
-                        "-fx-background-color: transparent;" +
-                        "-fx-border-color: transparent;" +
-                        "-fx-border-radius: 20, 20;"
-
-                );
+                leave.setStyle(style1);
             }
         });
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -140,13 +117,12 @@ public class homePage extends Scene {
                 isClose=true;
             }
         });
-
         settings.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
                 settings.setStyle("-fx-font: 30 Impact;" +
                         "-fx-font-weight: bold;"+
-                        "-fx-text-fill: yellow;"+
+                        "-fx-text-fill: darkred;"+
                         "-fx-background-color: transparent;"
                 );
             }
@@ -169,6 +145,7 @@ public class homePage extends Scene {
                 isSetting=true;
             }
         });
+
     }
 
     public boolean isClose() {

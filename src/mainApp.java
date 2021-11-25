@@ -14,20 +14,22 @@ public class mainApp extends Application {
     private settingScene param;
     private GameScene theScene;
     private int state =0;
+    private KeyConfig clavier;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+        clavier = new KeyConfig();
 
         primaryStage.setTitle("myFortress");
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
         Group root = new Group();
-        menu = new homePage(root, 600,400);
+        menu = new homePage(root, 900,618);
 
         Group rootSett = new Group();
-        param = new settingScene(rootSett, 600, 400);
+        param = new settingScene(rootSett, 900, 618, clavier);
 
         primaryStage.setScene(menu);
 
@@ -50,7 +52,7 @@ public class mainApp extends Application {
                                 state = 2;
                                 menu.resetState();
                                 Group rootGame = new Group();
-                                theScene = new GameScene(rootGame, 900, 618);
+                                theScene = new GameScene(rootGame, 900, 618, param.getConfig());
                                 primaryStage.setScene(theScene);
                             }
                         }

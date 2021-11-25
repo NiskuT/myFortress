@@ -134,6 +134,13 @@ public class Hero extends AnimatedThing{
         prevState = state;
     }
 
+    public Double getBlood(){
+        if(!invincible) return 0.;
+        else{
+            Double a = Double.valueOf(actualTime-lastTimeHit)/Double.valueOf(invincibilityTime);
+            return 0.5-0.5*a;
+        }
+    }
 
     public void jump() {
         if (y == 0) {

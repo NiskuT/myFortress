@@ -6,7 +6,7 @@ public class flyingFoe extends AnimatedThing {
     private Double xHero;
 
     public flyingFoe(Double x) {
-        super(x, 210., "ressources/birdSprite.png", 8);
+        super(x, 170., "ressources/birdSprite.png", 10);
 
         vx = -2 * (85 / 1.70);
 
@@ -29,10 +29,12 @@ public class flyingFoe extends AnimatedThing {
 
 
     private void selectViewPort(){
-        sprite.setViewport(new Rectangle2D(73 * index, 0, 73, 67));
+        if (index<=4) sprite.setViewport(new Rectangle2D(60 * index, 0, 60, 50));
+        else sprite.setViewport(new Rectangle2D(60 * (index-5), 77, 60, 50));
     }
 
     public void updateSprite(){
-        index = (index+1)%indexMax;
+        index--;
+        if (index == -1) index = 9;
     }
 }

@@ -3,7 +3,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
@@ -11,8 +10,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -28,19 +25,26 @@ public class GameScene extends Scene {
     private ArrayList<AnimatedThing> ennemies = new ArrayList<>();
     private Group root;
 
+    private KeyConfig config;
+
     private ProgressBar shootMana;
+    private ImageView blood;
 
     private boolean isMenu = false;
     private boolean isClose = false;
     private Button menu;
     private Button leave;
+    private ImageView croix;
 
-    public GameScene(Group root, Integer length, Integer height) {
+    public GameScene(Group root, Integer length, Integer height, KeyConfig config) {
         super(root,length,height);
         this.root = root;
+        this.config = config;
         camera = new Camera(0.,0.);
         context = new staticThing(0.,0., 5);
         personnage = new Hero();
+        blood = new ImageView(new Image("ressources/BloodOverlay.png"));
+        initCroix();
 
         keyboard();
 
@@ -79,6 +83,9 @@ public class GameScene extends Scene {
         this.root.getChildren().add(context);
         this.root.getChildren().add(personnage.getSprite());
         initProgress();
+        blood.setOpacity(0.);
+        this.root.getChildren().add(blood);
+        this.root.getChildren().add(croix);
 
         timer.start();
         spriteUpdate.start();
@@ -90,12 +97,12 @@ public class GameScene extends Scene {
         shootMana = new ProgressBar(1);
         shootMana.relocate(15,50);
         shootMana.setStyle(
-                "-fx-text-box-border: forestgreen;" +
-                "-fx-control-inner-background: palegreen;" +
-                "-fx-padding: 1px;"+
-                "-fx-background-insets: 0; "
-
+                "-fx-text-box-border: black;" +
+                "-fx-control-inner-background: black;" +
+                        "-fx-background-color: transparent;" +
+                        "-fx-accent: darkred;"
         );
+
 
         root.getChildren().add(shootMana);
     }
@@ -108,6 +115,7 @@ public class GameScene extends Scene {
         updateShoot(now);
         shootMana.setProgress(personnage.getProgress());
         personnage.update(camera.getX(),now);
+        blood.setOpacity(personnage.getBlood());
         camera.update(now, personnage.getX());
         context.update(camera.getX(), 0.);
     }
@@ -200,16 +208,16 @@ public class GameScene extends Scene {
     }
 
     private void handleKey(){
-        if (currentlyActiveKeys.get("SPACE")!=null && currentlyActiveKeys.get("SPACE")) {
+        if (currentlyActiveKeys.get(config.getJump())!=null && currentlyActiveKeys.get(config.getJump())) {
             personnage.jump();
-            currentlyActiveKeys.put("SPACE", false);
+            currentlyActiveKeys.put(config.getJump(), false);
         }
-        if (currentlyActiveKeys.get("SHIFT")!=null && currentlyActiveKeys.get("SHIFT")) {
+        if (currentlyActiveKeys.get(config.getSprint())!=null && currentlyActiveKeys.get(config.getSprint())) {
             personnage.sprint();
-            currentlyActiveKeys.put("SHIFT", false);
+            currentlyActiveKeys.put(config.getSprint(), false);
         }
-        if (currentlyActiveKeys.get("ALT")!=null && currentlyActiveKeys.get("ALT")) {
-            currentlyActiveKeys.put("ALT", false);
+        if (currentlyActiveKeys.get(config.getShoot())!=null && currentlyActiveKeys.get(config.getShoot())) {
+            currentlyActiveKeys.put(config.getShoot(), false);
             if (shoot.size() <2 && personnage.shoot()){
                 shoot.add(new Projectile(personnage.getX(), personnage.getY(), personnage.isSprinting()));
                 root.getChildren().add(shoot.get(shoot.size()-1).getSprite());
@@ -220,6 +228,7 @@ public class GameScene extends Scene {
 
     private void gameOver(){
         root.getChildren().remove(shootMana);
+        root.getChildren().remove(croix);
 
         ImageView go = new ImageView(new Image("ressources/gameover.png"));
         go.setX(180);
@@ -243,48 +252,34 @@ public class GameScene extends Scene {
         menu.setEffect(new DropShadow(3, 3, 3, Color.web("#111111")));
         leave.setEffect(new DropShadow(3, 3, 3, Color.web("#111111")));
 
-        menu.setStyle("-fx-font: 40 Impact;" +
+        String style1 = "-fx-font: 40 Impact;" +
                 "-fx-font-weight: bold;"+
                 "-fx-text-fill: black;"+
                 "-fx-background-color: transparent;" +
                 "-fx-border-color: transparent;" +
-                "-fx-border-radius: 20, 20;"
-        );
+                "-fx-border-radius: 20, 20;";
+        String style2 = "-fx-font: 40 Impact;" +
+                "-fx-font-weight: bold;"+
+                "-fx-text-fill: darkred;"+
+                "-fx-background-color: transparent;" +
+                "-fx-border-color: darkred;" +
+                "-fx-border-radius: 20, 20;";
 
-        leave.setStyle("-fx-font: 40 Impact;" +
-                "-fx-font-weight: bold;"+
-                "-fx-text-fill: black;"+
-                "-fx-background-color: transparent;" +
-                "-fx-border-color: transparent;" +
-                "-fx-border-radius: 20, 20;"
-        );
+        menu.setStyle(style1 );
+
+        leave.setStyle(style1);
 
         menu.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                menu.setStyle("-fx-font: 40 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: darkred;"+
-                        "-fx-background-color: transparent;" +
-                        "-fx-border-color: darkred;" +
-                        "-fx-border-radius: 20, 20;"
-
-                );
+                menu.setStyle(style2);
             }
         });
         menu.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
 
-                menu.setStyle("-fx-font: 40 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: black;"+
-                        "-fx-background-color: transparent;" +
-                        "-fx-border-color: transparent;" +
-                        "-fx-border-radius: 20, 20;"
-
-                );
-
+                menu.setStyle(style1);
             }
         });
 
@@ -298,28 +293,14 @@ public class GameScene extends Scene {
         leave.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                leave.setStyle("-fx-font: 40 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: darkred;"+
-                        "-fx-background-color: transparent;" +
-                        "-fx-border-color: darkred;" +
-                        "-fx-border-radius: 20, 20;"
-
-                );
+                leave.setStyle(style2);
             }
         });
         leave.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
 
-                leave.setStyle("-fx-font: 40 Impact;" +
-                        "-fx-font-weight: bold;"+
-                        "-fx-text-fill: black;"+
-                        "-fx-background-color: transparent;" +
-                        "-fx-border-color: transparent;" +
-                        "-fx-border-radius: 20, 20;"
-
-                );
+                leave.setStyle(style1);
             }
         });
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -328,6 +309,14 @@ public class GameScene extends Scene {
                 isClose=true;
             }
         });
+
+    }
+
+    private void initCroix(){
+        croix = new ImageView(new Image("ressources/croix.png"));
+        croix.setX(860.);
+        croix.setY(10.);
+        croix.setOnMouseClicked((mouseEvent)-> isClose = true);
     }
 
     public boolean isMenu() {
