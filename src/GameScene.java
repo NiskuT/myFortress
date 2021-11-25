@@ -1,5 +1,6 @@
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -136,7 +137,15 @@ public class GameScene extends Scene {
     }
 
     private Boolean isInCollision(ImageView a, ImageView b){
-        return a.getBoundsInParent().intersects(b.getBoundsInParent());
+        double z = 10;
+
+        Bounds c  = a.getBoundsInParent();
+        Bounds d  = b.getBoundsInParent();
+        Rectangle2D area1 = new Rectangle2D(c.getMinX()+z, c.getMinY()+z,c.getWidth()-2*z,c.getHeight()-2*z);
+
+        Rectangle2D area2 = new Rectangle2D(d.getMinX()+z, d.getMinY()+z,d.getWidth()-2*z,d.getHeight()-2*z);
+
+        return area1.intersects(area2);
     }
 
     private void updateShoot(long now){
