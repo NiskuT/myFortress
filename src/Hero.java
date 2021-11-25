@@ -15,6 +15,7 @@ public class Hero extends AnimatedThing{
     private long actualTime = 0;
     private long lastTimeShoot = 0;
     private long freqOfShoot = 500000000;
+    private Double progress = 1.;
 
 
     public Hero() {
@@ -34,7 +35,7 @@ public class Hero extends AnimatedThing{
     public void update(Double xCamera, long time){
         if( lastCall==0) lastCall = time;
         updateTime(time);
-
+        updateProgress();
         if(invincible && actualTime-lastTimeHit>invincibilityTime) invincible = false;
 
         vx+=ax*(time-lastCall)*Math.pow(10,-9);
@@ -65,6 +66,11 @@ public class Hero extends AnimatedThing{
 
     private void updateTime(long t){
         actualTime=t;
+    }
+
+    private void updateProgress(){
+        if (actualTime -lastTimeShoot > freqOfShoot) progress = 1.;
+        else progress = Double.valueOf(actualTime -lastTimeShoot)/Double.valueOf(freqOfShoot);
     }
 
     private void selectViewPort(){
@@ -170,5 +176,8 @@ public class Hero extends AnimatedThing{
     public void hit(){
         lastTimeHit = actualTime;
         invincible = true;
+    }
+    public Double getProgress(){
+        return progress;
     }
 }

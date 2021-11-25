@@ -6,10 +6,14 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +27,8 @@ public class GameScene extends Scene {
     private ArrayList<Projectile> shoot = new ArrayList<>();
     private ArrayList<AnimatedThing> ennemies = new ArrayList<>();
     private Group root;
+
+    private ProgressBar shootMana;
 
     private boolean isMenu = false;
     private boolean isClose = false;
@@ -69,21 +75,38 @@ public class GameScene extends Scene {
             }
         };
 
-        timer.start();
-        spriteUpdate.start();
 
         this.root.getChildren().add(context);
         this.root.getChildren().add(personnage.getSprite());
+        initProgress();
 
+        timer.start();
+        spriteUpdate.start();
 
 
     }
+
+    private void initProgress(){
+        shootMana = new ProgressBar(1);
+        shootMana.relocate(15,50);
+        shootMana.setStyle(
+                "-fx-text-box-border: forestgreen;" +
+                "-fx-control-inner-background: palegreen;" +
+                "-fx-padding: 1px;"+
+                "-fx-background-insets: 0; "
+
+        );
+
+        root.getChildren().add(shootMana);
+    }
+
     private void updateAll(long now){
         checkCollision();
         updateEnemy(now);
         summonEnemy();
         handleKey();
         updateShoot(now);
+        shootMana.setProgress(personnage.getProgress());
         personnage.update(camera.getX(),now);
         camera.update(now, personnage.getX());
         context.update(camera.getX(), 0.);
@@ -196,6 +219,8 @@ public class GameScene extends Scene {
 
 
     private void gameOver(){
+        root.getChildren().remove(shootMana);
+
         ImageView go = new ImageView(new Image("ressources/gameover.png"));
         go.setX(180);
         go.setY(35);
@@ -215,6 +240,8 @@ public class GameScene extends Scene {
         menu.setLayoutY(460.);
         leave.setLayoutX(500.);
         leave.setLayoutY(460.);
+        menu.setEffect(new DropShadow(3, 3, 3, Color.web("#111111")));
+        leave.setEffect(new DropShadow(3, 3, 3, Color.web("#111111")));
 
         menu.setStyle("-fx-font: 40 Impact;" +
                 "-fx-font-weight: bold;"+
