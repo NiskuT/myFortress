@@ -3,7 +3,13 @@
 
 This project is about making a runner in Java (little video game).
 
+## Get started:
+1-> go to Project Structure/Project and choose your Java SDK
+2-> go to Project Structure/Librairies and add a Java librairie: /path/to/javafx/lib
+3-> add a new configuration with mainApp for the main and select add VM options and add the following line:
+--module-path "/PATH/TO/JAVA-FX/lib" --add-modules javafx.controls
 
+Now Build the project and after that run it.
 
 ## Documentation
 
